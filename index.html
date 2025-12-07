@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 Путеводитель по профессиям</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe0ec 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideDown 0.6s ease;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #d946a6;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #c2185b;
+            margin-bottom: 30px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(217, 70, 166, 0.15);
+            animation: fadeIn 0.8s ease;
+        }
+
+        .section h2 {
+            color: #d946a6;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #f472b6;
+            padding-bottom: 10px;
+        }
+
+        .profession-list {
+            list-style: none;
+        }
+
+        .profession-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            border-left: 4px solid #d946a6;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profession-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 4px 12px rgba(217, 70, 166, 0.2);
+        }
+
+        .profession-name {
+            font-weight: 600;
+            color: #d946a6;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .profession-info {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d946a6;
+            font-weight: 600;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #f472b6;
+            border-radius: 8px;
+            font-size: 1em;
+            color: #333;
+            background-color: #fff9fc;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #d946a6;
+            background-color: white;
+        }
+
+        .button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #d946a6 0%, #c2185b 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(217, 70, 166, 0.3);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        .roadmap-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(217, 70, 166, 0.15);
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .roadmap-container.active {
+            display: block;
+        }
+
+        .roadmap-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #f472b6;
+            padding-bottom: 20px;
+        }
+
+        .roadmap-header h2 {
+            color: #d946a6;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #f472b6;
+        }
+
+        .info-label {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #d946a6;
+        }
+
+        .skills-section, .courses-section, .timeline-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            color: #d946a6;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f472b6;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #d946a6 0%, #c2185b 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 5px 5px 5px 0;
+            font-size: 0.9em;
+        }
+
+        .course-item {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 4px solid #d946a6;
+        }
+
+        .course-name {
+            font-weight: 600;
+            color: #d946a6;
+            margin-bottom: 5px;
+        }
+
+        .course-meta {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #d946a6 0%, #c2185b 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            flex-shrink: 0;
+            margin-right: 20px;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-month {
+            font-weight: 600;
+            color: #d946a6;
+            margin-bottom: 5px;
+        }
+
+        .timeline-topic {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .loading {
+            text-align: center;
+            color: #d946a6;
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+
+        .error {
+            background: #ff6b9d;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌸 Путеводитель по профессиям</h1>
+            <p class="subtitle">Найди свой путь в IT за 5 месяцев</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Левая колонка: Выбор профессии -->
+            <div class="section">
+                <h2>📋 Выбери профессию</h2>
+                <ul class="profession-list" id="professionList"></ul>
+            </div>
+
+            <!-- Правая колонка: Параметры -->
+            <div class="section">
+                <h2>⚙️ Твои параметры</h2>
+                
+                <div class="input-group">
+                    <label for="profession">Профессия:</label>
+                    <input type="text" id="profession" placeholder="Выбери из списка слева" readonly>
+                </div>
+
+                <div class="input-group">
+                    <label for="level">Твой опыт:</label>
+                    <select id="level">
+                        <option value="junior">Начинающий (Junior)</option>
+                        <option value="middle">Средний уровень (Middle)</option>
+                        <option value="senior">Продвинутый (Senior)</option>
+                    </select>
+                </div>
+
+                <button class="button" onclick="generateRoadmap()">🚀 Создать мою дорожную карту</button>
+            </div>
+        </div>
+
+        <!-- Дорожная карта -->
+        <div class="roadmap-container" id="roadmapContainer">
+            <div class="roadmap-header">
+                <h2 id="roadmapTitle">Твоя дорожная карта</h2>
+                <p id="roadmapDescription"></p>
+            </div>
+
+            <!-- Статистика -->
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">Зарплата</div>
+                    <div class="info-value" id="salaryRange">-</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Спрос</div>
+                    <div class="info-value" id="demand">-</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Месяцев</div>
+                    <div class="info-value" id="timeEstimate">-</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Навыков</div>
+                    <div class="info-value" id="skillsCount">-</div>
+                </div>
+            </div>
+
+            <!-- Требуемые навыки -->
+            <div class="skills-section">
+                <div class="section-title">💪 Требуемые навыки</div>
+                <div id="skillsList"></div>
+            </div>
+
+            <!-- Курсы -->
+            <div class="courses-section">
+                <div class="section-title">📚 Рекомендуемые курсы</div>
+                <div id="coursesList"></div>
+            </div>
+
+            <!-- График обучения -->
+            <div class="timeline-section">
+                <div class="section-title">📅 График обучения</div>
+                <div id="timeline"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://127.0.0.1:8000';
+        let selectedProfession = null;
+
+        // Загрузить профессии при загрузке страницы
+        document.addEventListener('DOMContentLoaded', loadProfessions);
+
+        async function loadProfessions() {
+            try {
+                const response = await fetch(`${API_URL}/professions`);
+                const data = await response.json();
+                
+                const listContainer = document.getElementById('professionList');
+                listContainer.innerHTML = '';
+                
+                data.professions.forEach(prof => {
+                    const li = document.createElement('li');
+                    li.className = 'profession-item';
+                    li.onclick = () => selectProfession(prof.name);
+                    li.innerHTML = `
+                        <div class="profession-name">${prof.name}</div>
+                        <div class="profession-info">💰 ${prof.salary} | 📈 ${prof.demand}</div>
+                    `;
+                    listContainer.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Ошибка загрузки профессий:', error);
+            }
+        }
+
+        function selectProfession(name) {
+            selectedProfession = name;
+            document.getElementById('profession').value = name;
+            
+            // Подсвечиваем выбранный элемент
+            document.querySelectorAll('.profession-item').forEach(el => {
+                el.style.backgroundColor = '';
+            });
+            event.target.closest('.profession-item').style.backgroundColor = '#f472b6';
+        }
+
+        async function generateRoadmap() {
+            if (!selectedProfession) {
+                alert('Выбери профессию!');
+                return;
+            }
+
+            const level = document.getElementById('level').value;
+            
+            try {
+                const response = await fetch(`${API_URL}/roadmap`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        profession: selectedProfession,
+                        experience_level: level
+                    })
+                });
+
+                const data = await response.json();
+                displayRoadmap(data);
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка при создании дорожной карты');
+            }
+        }
+
+        function displayRoadmap(data) {
+            const container = document.getElementById('roadmapContainer');
+            
+            // Заголовок
+            document.getElementById('roadmapTitle').textContent = data.profession;
+            document.getElementById('roadmapDescription').textContent = data.description;
+            
+            // Статистика
+            document.getElementById('salaryRange').textContent = data.salary_range;
+            document.getElementById('demand').textContent = data.market_demand;
+            document.getElementById('timeEstimate').textContent = data.estimated_time_months;
+            document.getElementById('skillsCount').textContent = data.required_skills.length;
+            
+            // Навыки
+            const skillsList = document.getElementById('skillsList');
+            skillsList.innerHTML = data.required_skills.map(skill => 
+                `<span class="skill-tag">${skill}</span>`
+            ).join('');
+            
+            // Курсы
+            const coursesList = document.getElementById('coursesList');
+            coursesList.innerHTML = data.recommended_courses.map(course => `
+                <div class="course-item">
+                    <div class="course-name">📖 ${course.name}</div>
+                    <div class="course-meta">${course.platform} • ${course.hours} часов</div>
+                </div>
+            `).join('');
+            
+            // Таймлайн
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = data.learning_roadmap.map((item, idx) => `
+                <div class="timeline-item">
+                    <div class="timeline-dot">${item.month}</div>
+                    <div class="timeline-content">
+                        <div class="timeline-month">Месяц ${item.month}</div>
+                        <div class="timeline-topic">${item.topic}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Показываем дорожную карту
+            container.classList.add('active');
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
